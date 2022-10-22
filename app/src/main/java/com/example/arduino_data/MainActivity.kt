@@ -6,9 +6,12 @@ import android.os.Bundle
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import com.android.volley.Request
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
+import com.google.android.material.bottomnavigation.BottomNavigationMenuView
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.internal.ContextUtils.getActivity
 import com.jjoe64.graphview.GraphView
 import com.jjoe64.graphview.LegendRenderer
@@ -24,7 +27,8 @@ class MainActivity : AppCompatActivity() {
 
     private val data = ArrayList<Data>()
 
-    private lateinit var testView: TextView
+    private lateinit var menu: BottomNavigationView
+ //   private lateinit var testView: TextView
 //    private var plot: XYPlot? = null
 
 
@@ -40,91 +44,54 @@ class MainActivity : AppCompatActivity() {
         catch (ex: Exception){
             print(ex)
         }
-        try{
 
 
-        }
-        catch (ex: Exception){
-            println(ex)
+
+        menu.setOnItemSelectedListener{
+                when(it.itemId){
+                    R.id.sensor1 -> {
+                        replaceFragment(Sensor1())
+                        Toast.makeText(this, "Сенсор 1", Toast.LENGTH_SHORT).show()
+                    }
+                    R.id.sensor2 -> {
+                        replaceFragment(Sensor2())
+                        Toast.makeText(this, "Сенсор 2", Toast.LENGTH_SHORT).show()
+                    }
+                    R.id.sensor3 -> {
+                        replaceFragment(Sensor3())
+                        Toast.makeText(this, "Сенсор 3", Toast.LENGTH_SHORT).show()
+                    }
+                    R.id.sensor4 -> {
+                        replaceFragment(Sensor4())
+                        Toast.makeText(this, "Сенсор 4", Toast.LENGTH_SHORT).show()
+                    }
+                    R.id.sensor5 -> {
+                        replaceFragment(Sensor5())
+                        Toast.makeText(this, "Сенсор 5", Toast.LENGTH_SHORT).show()
+                    }
+
+                    else -> {
+
+                    }
+                }
+                true
+
         }
 
     }
 
-    @SuppressLint("RestrictedApi")
-    private fun getPlot() {
+    private fun replaceFragment(fragment: Fragment){
+        val bundle = Bundle()
+        bundle.putParcelableArrayList("list", data);
+        fragment.arguments = bundle
+        val fragmentManager = supportFragmentManager
+        val fragmentTransaction = fragmentManager.beginTransaction()
+        fragmentTransaction.replace(R.id.frame_layout, fragment)
 
-
-        val graph: GraphView = findViewById(R.id.graph)
-        val series: LineGraphSeries<DataPoint> = LineGraphSeries<DataPoint>()
-        val series2: LineGraphSeries<DataPoint> = LineGraphSeries<DataPoint>()
-        for (i in 0 until data.size) {
-            series.appendData(DataPoint(i.toDouble(), data[i].field1.toDouble()), true, data.size)
-            println("series: ${series.lowestValueY}")
-        }
-
-        for (i in 0 until 10) {
-            series2.appendData(DataPoint(i.toDouble(), Math.random() + 200), true, 10)
-            println("series: ${series.lowestValueY}")
-        }
-
-        //Задаємо зовнішній вигляд кривої
-        //Задаємо зовнішній вигляд кривої
-        series.color = Color.rgb(0, 80, 100) //встановити колір кривої
-        series.title = "CO2" // встановити назву кривої для легенди
-        series.isDrawDataPoints = true // промальовувати точки
-        series.dataPointsRadius = 15f // радіус точки даних
-        series.thickness = 2 //товщина лінії
-
-        series2.color = Color.rgb(234, 80, 100) //встановити колір кривої
-        series2.title = "Что-то иное" // встановити назву кривої для легенди
-        series2.isDrawDataPoints = true // промальовувати точки
-        series2.dataPointsRadius = 15f // радіус точки даних
-        series2.thickness = 2 //товщина лінії
-
-
-        graph.addSeries(series)
-        graph.addSeries(series2)
-
-        //Назва графіка
-
-        //Назва графіка
-        graph.title = "Expenses"
-        graph.titleTextSize = 50F
-        graph.titleColor = Color.RED
-        //Легенда
-        //Легенда
-        graph.legendRenderer.isVisible = true
-        graph.legendRenderer.align = LegendRenderer.LegendAlign.TOP
-
-        graph.viewport.isScalable = true;
-
-// activate horizontal scrolling
-        graph.viewport.isScrollable = true;
-
-// activate horizontal and vertical zooming and scrolling
-        graph.viewport.setScalableY(true);
-
-// activate vertical scrolling
-        graph.viewport.setScrollableY(true);
-
-        graph.legendRenderer.align = LegendRenderer.LegendAlign.TOP;
-
-        series.setOnDataPointTapListener { series, dataPoint ->
-            Toast.makeText(
-                getActivity(this),
-                "Информация с датчика CO2: \n Показатель ${dataPoint.y} \nВремя ${data[dataPoint.x.toInt()].field1Date}",
-                Toast.LENGTH_SHORT
-            ).show()
-        }
-
-        series2.setOnDataPointTapListener { series, dataPoint ->
-            Toast.makeText(
-                getActivity(this),
-                "Информация с датчика о чем-то ином: \n Показатель ${dataPoint.y} \nВремя ${dataPoint.x}",
-                Toast.LENGTH_SHORT
-            ).show()
-        }
+        fragmentTransaction.commit()
     }
+
+
 
 
     private fun getResultFeed(){
@@ -149,7 +116,7 @@ class MainActivity : AppCompatActivity() {
                 field1Date = checkText(field1Date, "T")
                 field1Date = checkText(field1Date, "Z")
 
-                field2Date = checkText(field1Date, "Z")
+                field2Date = checkText(field1Date, "T")
                 field2Date = checkText(field1Date, "Z")
 
                 data.add(Data(field1, field1Date, field2, field2Date))
@@ -159,8 +126,9 @@ class MainActivity : AppCompatActivity() {
                         "field 2: ${data[i].field2} dateF2: ${data[i].field2Date} \n"
 
             }
-            testView.text = res
-            getPlot()
+//            testView.text = res
+        //    getPlot()
+            replaceFragment(Sensor1())
         }, {
                 error -> //Случай неудачного результата отклика api
             println(error.toString())
@@ -168,13 +136,12 @@ class MainActivity : AppCompatActivity() {
         queue.add(stringRequest) //Добавление запроса в очередь
     }
 
-    private fun init(){
-        testView = findViewById(R.id.testView)
-    }
-
     private fun checkText(date: String, key: String): String {
         return date.replace("$key", " ", false)
     }
 
+    private fun init(){
+        menu = findViewById(R.id.bottom_navigation_view)
+    }
 
 }
