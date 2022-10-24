@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:title="Датчик 1"
+        android:id="@+id/sensor1"
+        android:icon="@drawable/ic_sensor"/>
+    <item android:title="Датчик 2"
+        android:id="@+id/sensor2"
+        android:icon="@drawable/ic_sensor"/>
+    <item android:title="Датчик 3"
+        android:id="@+id/sensor3"
+        android:icon="@drawable/ic_sensor"/>
+    <item android:title="Датчик 4"
+        android:id="@+id/sensor4"
+        android:icon="@drawable/ic_sensor"/>
+    <item android:title="Датчик 5"
+        android:id="@+id/sensor5"
+        android:icon="@drawable/ic_sensor"/>
+</menu>
