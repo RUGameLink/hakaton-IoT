@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IoT WEB</title>
     <link rel="stylesheet" href="style.css"> 
+    <link rel="icon" href="/img/favicon.ico">
 </head>
 <body>
     <table class="iksweb">
@@ -13,7 +14,7 @@
             <tr>
                 <td colspan="2">
                     <div>
-                        <h1 id="title">Программный кот: [тут могло быть название кейса, но я его забыл]</h1>
+                        <h1 id="title">Программный кот: Мониторинг качества атмосферного воздуха в городах</h1>
                     </div>
                 </td>
             </tr>
@@ -26,7 +27,7 @@
             </tr>
             <tr>
                 <td>
-                    <div id="frame-form"><iframe width="450" height="260" style="border: 1px solid #cccccc;" src="https://thingspeak.com/channels/1603688/charts/1?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&type=line&update=15"></iframe></div>
+                    <div id="frame-form"><iframe width="450" height="260" style="border: 1px solid #cccccc;" src="https://thingspeak.com/channels/1905663/charts/1?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&type=line&update=15"></iframe></div>
                 </td>
                 <td>
                     <div id="frame-form"><iframe width="450" height="260" style="border: 1px solid #cccccc;" src="https://thingspeak.com/channels/1603688/charts/2?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&type=line&update=15"></iframe></div>
@@ -48,15 +49,17 @@
                 <td></td>
             </tr>
             <tr>
-                <td colspan="2"></td>
+                <td colspan="2">
+                    <h3 id="title">Расположение датчиков</h3>
+                </td>
             </tr>
             <tr>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td></td>
+                <td colspan="2">
+                    <div id="map-test" class="map"></div>
+	                    <script src="https://api-maps.yandex.ru/2.1/?apikey=402186c1-ed80-420c-8ee3-dd5ad7b88584&lang=ru_RU">
+	                    </script>
+	                <script src="script.js"></script>
+                </td>
             </tr>
         </tbody>
     </table>
