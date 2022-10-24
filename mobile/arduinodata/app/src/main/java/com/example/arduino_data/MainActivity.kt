@@ -1,26 +1,11 @@
 package com.example.arduino_data
 
-import android.annotation.SuppressLint
-import android.content.pm.ActivityInfo
-import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
-import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import com.android.volley.Request
-import com.android.volley.toolbox.StringRequest
-import com.android.volley.toolbox.Volley
-import com.google.android.material.bottomnavigation.BottomNavigationMenuView
+import com.example.arduino_data.Sensors.*
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.internal.ContextUtils.getActivity
-import com.jjoe64.graphview.GraphView
-import com.jjoe64.graphview.LegendRenderer
-import com.jjoe64.graphview.series.DataPoint
-import com.jjoe64.graphview.series.LineGraphSeries
-import org.json.JSONObject
-import org.json.JSONTokener
 
 
 class MainActivity : AppCompatActivity() {

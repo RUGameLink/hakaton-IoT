@@ -3,12 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Sensor5">
+    tools:context=".Sensors.Sensor5">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <WebView
+        android:id="@+id/webView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="сенсор 5" />
-
+        android:layout_height="match_parent" />
 </FrameLayout>

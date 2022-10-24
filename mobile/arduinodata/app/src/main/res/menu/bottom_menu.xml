@@ -13,7 +13,7 @@
     <item android:title="Датчик 4"
         android:id="@+id/sensor4"
         android:icon="@drawable/ic_sensor"/>
-    <item android:title="Датчик 5"
+    <item android:title="Все датчики"
         android:id="@+id/sensor5"
-        android:icon="@drawable/ic_sensor"/>
+        android:icon="@drawable/ic_web"/>
 </menu>

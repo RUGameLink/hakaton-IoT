@@ -31,6 +31,16 @@ table.iksweb th {
     text-align: center;
 }
 
+#legend{
+	text-align: center;
+}
+
+#legend_left{
+	text-align: top;
+	left: 0%;
+	right: 200;
+}
+
 .map {
 	width: 100%;
 	height: 480px;

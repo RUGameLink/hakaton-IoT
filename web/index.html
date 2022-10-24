@@ -26,13 +26,17 @@
                 </td>
             </tr>
             <tr>
-                <td colspan="2">
+                <td>
                     <div id="frame-form"><iframe width="450" height="260" style="border: 1px solid #cccccc;" src="https://thingspeak.com/channels/1905663/charts/1?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&type=line&update=15"></iframe></div>
                 </td>
-            </tr>
-            <tr>
-                <td></td>
-                <td></td>
+                <td>
+                    <div id="frame-form">
+                        <iframe width="450" height="260" style="border: 1px solid #cccccc;" src="https://thingspeak.com/channels/1905963/widgets/535729"></iframe>
+                    </div>
+
+                    <p id="legend">Темно-зеленый - норма на улице; Зеленый - норма в помещении; 
+                        Светло-зеленый - снижается внимание; Желтый - усталость; Оранжевый - Темно-красный - "Мозги отключены"</p>
+                </td>
             </tr>
             <tr>
                 <td colspan="2">
@@ -40,8 +44,15 @@
                 </td>
             </tr>
             <tr>
-                <td colspan="2">
+                <td>
                     <div id="frame-form"><iframe width="450" height="260" style="border: 1px solid #cccccc;" src="https://thingspeak.com/channels/1905663/charts/2?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&type=line&update=15"></iframe></div>
+                </td>
+                <td>
+                    <div id="frame-form">
+                        <iframe width="450" height="260" style="border: 1px solid #cccccc;" src="https://thingspeak.com/channels/1905963/widgets/535750"></iframe>
+                    </div>
+                    <p id="legend">Темно-зеленый - норма; Зеленый - превышает норму; 
+                        Желтый - умеренно-опасный; Оранжевый - опасный; Красный - очень опасный; Темно - красный - смертельно опасный</p>
                 </td>
             </tr>
             <tr>
@@ -58,13 +69,29 @@
                 </td>
             </tr>
             <tr>
+                <td>
+                    <div id="frame-form">
+                        <iframe width="450" height="260" style="border: 1px solid #cccccc;" src="https://thingspeak.com/channels/1905963/widgets/535759"></iframe>
+                    </div>
+                    <p id="legend">Синий - умеренно прохладно; Голубой - прохладно; Зеленый - умеренно тепло; Желтый - тепло; Оранжевый - жарко; Красный - очень жарко</p>
+                </td>
+                <td>
+                    <div id="frame-form"><iframe width="450" height="260" style="border: 1px solid #cccccc;" src="https://thingspeak.com/channels/1905963/widgets/535724"></iframe></div>
+                    <p id="legend">Желтый - сухой; Зеленый - оптимальный; Голубой - влажный; Синий - мокрый</p>
+                </td>
+            </tr>
+            <tr>
                 <td colspan="2">
                     <h2 id="title">Датчик 4 (MQ-3)</h2>
                 </td>
             </tr>
             <tr>
-                <td colspan="2">
+                <td>
                     <div id="frame-form"><iframe width="450" height="260" style="border: 1px solid #cccccc;" src="https://thingspeak.com/channels/1905663/charts/5?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&type=line&update=15"></iframe></div>
+                </td>
+                <td>
+                    <div id="frame-form"><iframe width="450" height="260" style="border: 1px solid #cccccc;" src="https://thingspeak.com/channels/1905963/widgets/535763"></iframe></div>
+                    <p id="legend">Заглушка</p>
                 </td>
             </tr>
             <tr>
@@ -73,7 +100,7 @@
                 </td>
             </tr>
             <tr>
-                <td colspan="2">
+                <td>
                     <div id="map-test" class="map"></div>
 	                    <script src="https://api-maps.yandex.ru/2.1/?apikey=402186c1-ed80-420c-8ee3-dd5ad7b88584&lang=ru_RU">
 	                    </script>
