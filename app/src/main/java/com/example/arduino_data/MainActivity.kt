@@ -3,6 +3,7 @@ package com.example.arduino_data
 import android.annotation.SuppressLint
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -22,8 +23,8 @@ import org.json.JSONTokener
 
 
 class MainActivity : AppCompatActivity() {
-    private val CHANNEL: String = "1603688"
-    private val APIKEY: String = "PFX7AGK7AGX15KLA"
+    private val CHANNEL: String = "1905663"
+    private val APIKEY: String = "QB3CPWI4W3984MVK"
 
     private val data = ArrayList<Data>()
 
@@ -97,7 +98,7 @@ class MainActivity : AppCompatActivity() {
     private fun getResultFeed(){
         var res = ""
 
-        val URL = "https://api.thingspeak.com/channels/$CHANNEL/feeds.json?api_key=$APIKEY&results=2"
+        val URL = "https://api.thingspeak.com/channels/$CHANNEL/feeds.json?api_key=$APIKEY&results=3"
         val queue = Volley.newRequestQueue(this) //Инициализация переменной для передачи запроса
         val stringRequest = StringRequest(Request.Method.GET, URL, { //Передача запроса и получение ответа
                 response -> //Случай удачного результата отклика api
@@ -105,6 +106,7 @@ class MainActivity : AppCompatActivity() {
 
 
             val jsonArray = jsonObject.getJSONArray("feeds")
+            println("Key $jsonArray")
         //    testView.text = jsonArray.toString()
 
             for (i in 0 until jsonArray.length()) {
