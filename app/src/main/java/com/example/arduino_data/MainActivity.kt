@@ -91,7 +91,6 @@ class MainActivity : AppCompatActivity() {
 
     private fun getResultFeed(){
         var res = ""
-
         val URL = "https://api.thingspeak.com/channels/$CHANNEL/feeds.json?api_key=$APIKEY&results=3"
         val queue = Volley.newRequestQueue(this) //Инициализация переменной для передачи запроса
         val stringRequest = StringRequest(Request.Method.GET, URL, { //Передача запроса и получение ответа
