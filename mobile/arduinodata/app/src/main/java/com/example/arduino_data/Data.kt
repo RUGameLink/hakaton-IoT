@@ -7,12 +7,9 @@ data class Data(
     val field1: String,
     val field1Date: String,
 
-    val field2: String,
-    val field2Date: String
+
 ): Parcelable {
     constructor(parcel: Parcel) : this (
-        parcel.readString()!!,
-        parcel.readString()!!,
         parcel.readString()!!,
         parcel.readString()!!
         )

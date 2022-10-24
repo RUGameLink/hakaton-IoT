@@ -38,7 +38,8 @@ class MainActivity : AppCompatActivity() {
         init()
 
         try {
-            getResultFeed()
+        //    getResultFeed()
+            replaceFragment(Sensor1())
         }
         catch (ex: Exception){
             print(ex)
@@ -79,9 +80,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun replaceFragment(fragment: Fragment){
-        val bundle = Bundle()
-        bundle.putParcelableArrayList("list", data);
-        fragment.arguments = bundle
+//        val bundle = Bundle()
+//        bundle.putParcelableArrayList("list", data);
+//        fragment.arguments = bundle
         val fragmentManager = supportFragmentManager
         val fragmentTransaction = fragmentManager.beginTransaction()
         fragmentTransaction.replace(R.id.frame_layout, fragment)
@@ -89,51 +90,47 @@ class MainActivity : AppCompatActivity() {
         fragmentTransaction.commit()
     }
 
-    private fun getResultFeed(){
-        var res = ""
-        val URL = "https://api.thingspeak.com/channels/$CHANNEL/feeds.json?api_key=$APIKEY&results=3"
-        val queue = Volley.newRequestQueue(this) //Инициализация переменной для передачи запроса
-        val stringRequest = StringRequest(Request.Method.GET, URL, { //Передача запроса и получение ответа
-                response -> //Случай удачного результата отклика api
-            val jsonObject = JSONTokener(response).nextValue() as JSONObject
-
-
-            val jsonArray = jsonObject.getJSONArray("feeds")
-            println("Key $jsonArray")
-        //    testView.text = jsonArray.toString()
-
-            for (i in 0 until jsonArray.length()) {
-                val field1 = jsonArray.getJSONObject(i).getString("field1")
-                val field2 = jsonArray.getJSONObject(i).getString("field2")
-
-                var field1Date = jsonArray.getJSONObject(i).getString("created_at")
-                var field2Date = jsonArray.getJSONObject(i).getString("created_at")
-                field1Date = checkText(field1Date, "T")
-                field1Date = checkText(field1Date, "Z")
-
-                field2Date = checkText(field1Date, "T")
-                field2Date = checkText(field1Date, "Z")
-
-                data.add(Data(field1, field1Date, field2, field2Date))
-            }
-            for (i in 0 until  data.size){
-                res = res + "field 1: ${data[i].field1} dateF1: ${data[i].field1Date} \n" +
-                        "field 2: ${data[i].field2} dateF2: ${data[i].field2Date} \n"
-
-            }
-//            testView.text = res
-        //    getPlot()
-            replaceFragment(Sensor1())
-        }, {
-                error -> //Случай неудачного результата отклика api
-            println(error.toString())
-        })
-        queue.add(stringRequest) //Добавление запроса в очередь
-    }
-
-    private fun checkText(date: String, key: String): String {
-        return date.replace("$key", " ", false)
-    }
+//    private fun getResultFeed(){
+//        var res = ""
+//        val URL = "https://api.thingspeak.com/channels/$CHANNEL/feeds.json?api_key=$APIKEY&results=3"
+//        val queue = Volley.newRequestQueue(this) //Инициализация переменной для передачи запроса
+//        val stringRequest = StringRequest(Request.Method.GET, URL, { //Передача запроса и получение ответа
+//                response -> //Случай удачного результата отклика api
+//            val jsonObject = JSONTokener(response).nextValue() as JSONObject
+//
+//
+//            val jsonArray = jsonObject.getJSONArray("feeds")
+//            println("Key $jsonArray")
+//        //    testView.text = jsonArray.toString()
+//
+//            for (i in 0 until jsonArray.length()) {
+//                val field1 = jsonArray.getJSONObject(i).getString("field1")
+//                val field2 = jsonArray.getJSONObject(i).getString("field2")
+//
+//                var field1Date = jsonArray.getJSONObject(i).getString("created_at")
+//                var field2Date = jsonArray.getJSONObject(i).getString("created_at")
+//                field1Date = checkText(field1Date, "T")
+//                field1Date = checkText(field1Date, "Z")
+//
+//                field2Date = checkText(field1Date, "T")
+//                field2Date = checkText(field1Date, "Z")
+//
+//                data.add(Data(field1, field1Date, field2, field2Date))
+//            }
+//
+////            testView.text = res
+//        //    getPlot()
+//            replaceFragment(Sensor1())
+//        }, {
+//                error -> //Случай неудачного результата отклика api
+//            println(error.toString())
+//        })
+//        queue.add(stringRequest) //Добавление запроса в очередь
+//    }
+//
+//    private fun checkText(date: String, key: String): String {
+//        return date.replace("$key", " ", false)
+//    }
 
     private fun init(){
         menu = findViewById(R.id.bottom_navigation_view)

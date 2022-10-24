@@ -1,15 +1,13 @@
 package com.example.arduino_data
 
 import android.annotation.SuppressLint
-import android.app.Activity
 import android.graphics.Color
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import com.androidplot.util.PixelUtils.init
+import androidx.fragment.app.Fragment
 import com.jjoe64.graphview.GraphView
 import com.jjoe64.graphview.LegendRenderer
 import com.jjoe64.graphview.series.DataPoint
@@ -20,6 +18,7 @@ import com.jjoe64.graphview.series.LineGraphSeries
 private const val ARG_PARAM1 = "list"
 
 
+
 /**
  * A simple [Fragment] subclass.
  * Use the [Sensor1.newInstance] factory method to
@@ -28,12 +27,13 @@ private const val ARG_PARAM1 = "list"
 class Sensor1 : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1 = ArrayList<Data>()
+    private lateinit var apiHelper: ApiHelper
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            val args = arguments
-            param1 = args?.getParcelableArrayList<Data>(ARG_PARAM1)!!
+//            val args = arguments
+//            param1 = args?.getParcelableArrayList<Data>(ARG_PARAM1)!!
         }
     }
 
@@ -43,7 +43,7 @@ class Sensor1 : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_sensor1, container, false)
-
+        apiHelper = ApiHelper("1905663", "QB3CPWI4W3984MVK")
         getPlot(view!!)
         return view
     }
@@ -64,55 +64,28 @@ class Sensor1 : Fragment() {
 
         val graph: GraphView = view.findViewById(R.id.graph)
         val series: LineGraphSeries<DataPoint> = LineGraphSeries<DataPoint>()
-        val series2: LineGraphSeries<DataPoint> = LineGraphSeries<DataPoint>()
-        for (i in 0 until param1.size) {
-            series.appendData(DataPoint(i.toDouble(), param1[i].field1.toDouble()), true, param1.size)
-            println("series: ${series.lowestValueY}")
-        }
 
-        for (i in 0 until 10) {
-            series2.appendData(DataPoint(i.toDouble(), Math.random() + 200), true, 10)
-            println("series: ${series.lowestValueY}")
-        }
-
-        //Задаємо зовнішній вигляд кривої
-        //Задаємо зовнішній вигляд кривої
-        series.color = Color.rgb(0, 80, 100) //встановити колір кривої
-        series.title = "CO2" // встановити назву кривої для легенди
-        series.isDrawDataPoints = true // промальовувати точки
-        series.dataPointsRadius = 15f // радіус точки даних
-        series.thickness = 2 //товщина лінії
-
-        series2.color = Color.rgb(234, 80, 100) //встановити колір кривої
-        series2.title = "Что-то иное" // встановити назву кривої для легенди
-        series2.isDrawDataPoints = true // промальовувати точки
-        series2.dataPointsRadius = 15f // радіус точки даних
-        series2.thickness = 2 //товщина лінії
-
+        series.color = Color.rgb(0, 80, 100)
+        series.title = "CO2"
+        series.isDrawDataPoints = true
+        series.dataPointsRadius = 15f
+        series.thickness = 2
 
         graph.addSeries(series)
-        graph.addSeries(series2)
 
-        //Назва графіка
-
-        //Назва графіка
         graph.title = "Expenses"
         graph.titleTextSize = 50F
         graph.titleColor = Color.RED
-        //Легенда
-        //Легенда
+
         graph.legendRenderer.isVisible = true
         graph.legendRenderer.align = LegendRenderer.LegendAlign.TOP
 
         graph.viewport.isScalable = true;
 
-// activate horizontal scrolling
         graph.viewport.isScrollable = true;
 
-// activate horizontal and vertical zooming and scrolling
         graph.viewport.setScalableY(true);
 
-// activate vertical scrolling
         graph.viewport.setScrollableY(true);
 
         graph.legendRenderer.align = LegendRenderer.LegendAlign.TOP;
@@ -124,13 +97,17 @@ class Sensor1 : Fragment() {
                 Toast.LENGTH_SHORT
             ).show()
         }
+    }
 
-        series2.setOnDataPointTapListener { series, dataPoint ->
-            Toast.makeText(
-                activity,
-                "Информация с датчика о чем-то ином: \n Показатель ${dataPoint.y} \nВремя ${dataPoint.x}",
-                Toast.LENGTH_SHORT
-            ).show()
+    override fun onResume() {
+        super.onResume()
+        var mTimer2 = object : Runnable {
+            override fun run() {
+                graph2LastXValue += 1.0
+                mSeries2.appendData(DataPoint(graph2LastXValue, getRandom()), true, 40)
+                mHandler.postDelayed(this, 200)
+            }
         }
+        mHandler.postDelayed(mTimer2, 1000)
     }
 }
