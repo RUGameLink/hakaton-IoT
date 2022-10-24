@@ -1,6 +1,7 @@
 package com.example.arduino_data
 
 import android.annotation.SuppressLint
+import android.content.pm.ActivityInfo
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
@@ -25,8 +26,6 @@ import org.json.JSONTokener
 class MainActivity : AppCompatActivity() {
     private val CHANNEL: String = "1905663"
     private val APIKEY: String = "QB3CPWI4W3984MVK"
-
-    private val data = ArrayList<Data>()
 
     private lateinit var menu: BottomNavigationView
 
@@ -135,5 +134,4 @@ class MainActivity : AppCompatActivity() {
     private fun init(){
         menu = findViewById(R.id.bottom_navigation_view)
     }
-
 }

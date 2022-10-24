@@ -6,10 +6,12 @@ import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import org.json.JSONObject
 import org.json.JSONTokener
+import java.lang.Exception
 
 class ApiHelper {
     private var CHANNEL: String
     private var APIKEY: String
+    private var data: Data? = null
 
     constructor(channel: String, apiKey: String){
         this.CHANNEL = channel
@@ -17,11 +19,11 @@ class ApiHelper {
     }
 
 
-    private fun getResultFeed(context: Context, field: String): Data{
+    public fun getResultFeed(context: Context, field: String){
         var field1 = ""
         var field1Date = ""
         var res = ""
-        val URL = "https://api.thingspeak.com/channels/$CHANNEL/feeds.json?api_key=$APIKEY&results=3"
+        val URL = "https://api.thingspeak.com/channels/$CHANNEL/feeds.json?api_key=$APIKEY&results=1"
         val queue = Volley.newRequestQueue(context) //Инициализация переменной для передачи запроса
         val stringRequest = StringRequest(Request.Method.GET, URL, { //Передача запроса и получение ответа
                 response -> //Случай удачного результата отклика api
@@ -32,8 +34,8 @@ class ApiHelper {
             println("Key $jsonArray")
 
             for (i in 0 until jsonArray.length()) {
-                field1 = jsonArray.getJSONObject(i).getString("field1")
-
+                field1 = jsonArray.getJSONObject(i).getString(field)
+                println("field1Test $field1")
 
                 field1Date = jsonArray.getJSONObject(i).getString("created_at")
 
@@ -42,16 +44,23 @@ class ApiHelper {
 
                 field1Date = checkText(field1Date, "Z")
 
-
-
             }
+            setData(field1, field1Date)
 
         }, {
                 error -> //Случай неудачного результата отклика api
             println(error.toString())
         })
         queue.add(stringRequest) //Добавление запроса в очередь
-        return Data(field1, field1Date)
+
+    }
+
+    private fun setData(field: String, date: String){
+        data = Data(field, date)
+    }
+
+    fun getData(): Data{
+            return data!!
     }
 
     private fun checkText(date: String, key: String): String {

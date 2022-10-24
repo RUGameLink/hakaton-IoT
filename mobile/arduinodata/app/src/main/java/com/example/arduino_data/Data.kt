@@ -4,8 +4,8 @@ import android.os.Parcel
 import android.os.Parcelable
 
 data class Data(
-    val field1: String,
-    val field1Date: String,
+    val field1: String?,
+    val field1Date: String?,
 
 
 ): Parcelable {
