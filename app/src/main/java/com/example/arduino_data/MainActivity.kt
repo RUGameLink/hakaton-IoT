@@ -90,9 +90,6 @@ class MainActivity : AppCompatActivity() {
         fragmentTransaction.commit()
     }
 
-
-
-
     private fun getResultFeed(){
         var res = ""
 
