@@ -29,8 +29,6 @@ class MainActivity : AppCompatActivity() {
     private val data = ArrayList<Data>()
 
     private lateinit var menu: BottomNavigationView
- //   private lateinit var testView: TextView
-//    private var plot: XYPlot? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
