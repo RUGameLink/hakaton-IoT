@@ -50,7 +50,7 @@ class Sensor4 : Fragment() {
         series.setOnDataPointTapListener { series, dataPoint ->
             Toast.makeText(
                 activity,
-                "Информация с датчика CO2: \n Показатель ${dataPoint.y} \nВремя ${field5Date}",
+                "Информация с датчика Спиртов: \n Показатель ${dataPoint.y} \nВремя ${field5Date}",
                 Toast.LENGTH_SHORT
             ).show()
         }
@@ -94,14 +94,14 @@ class Sensor4 : Fragment() {
         graph = view.findViewById(R.id.graph4)
 
         series.color = Color.rgb(0, 80, 100)
-        series.title = "Алкоголь"
+        series.title = "Спирт"
         series.isDrawDataPoints = true
         series.dataPointsRadius = 15f
         series.thickness = 2
 
         graph.addSeries(series)
 
-        graph.title = "Алкоголь"
+        graph.title = "Спирт"
         graph.titleTextSize = 50F
         graph.titleColor = Color.RED
 

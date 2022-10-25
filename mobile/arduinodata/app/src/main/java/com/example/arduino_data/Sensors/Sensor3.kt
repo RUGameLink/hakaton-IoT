@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import android.widget.Toast
 import com.android.volley.Request
 import com.android.volley.toolbox.StringRequest
@@ -26,8 +27,8 @@ import java.lang.Exception
 
 class Sensor3 : Fragment() {
     private var series: LineGraphSeries<DataPoint> = LineGraphSeries<DataPoint>()
-    private var series2: LineGraphSeries<DataPoint> = LineGraphSeries<DataPoint>()
     private lateinit var graph: GraphView
+    private lateinit var text: TextView
     private var graph2LastXValue = 0.0
 
     private var field3 = ""
@@ -50,20 +51,13 @@ class Sensor3 : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_sensor3, container, false)
+        text = view.findViewById(R.id.testView3)
         getPlot(view!!)
 
         series.setOnDataPointTapListener { series, dataPoint ->
             Toast.makeText(
                 activity,
                 "Информация с датчика Температуры: \n Показатель ${dataPoint.y} \nВремя ${field3Date}",
-                Toast.LENGTH_SHORT
-            ).show()
-        }
-
-        series2.setOnDataPointTapListener { series2, dataPoint ->
-            Toast.makeText(
-                activity,
-                "Информация с датчика Влажности: \n Показатель ${dataPoint.y} \nВремя ${field4Date}",
                 Toast.LENGTH_SHORT
             ).show()
         }
@@ -77,13 +71,10 @@ class Sensor3 : Fragment() {
                 {
 
                     getResultFeed("field3")
-                    getResultFeed("field4")
-                    if (field3 != "null" || field4 != "null"){
+                    if (field3 != "null"){
                         graph2LastXValue += 0.1;
                         series.appendData(DataPoint(graph2LastXValue, field3.toDouble()), true, 60)
-                        series2.appendData(DataPoint(graph2LastXValue, field4.toDouble()), true, 60)
                     }
-
                 }
                 catch (ex: Exception){
                     println(ex)
@@ -117,15 +108,7 @@ class Sensor3 : Fragment() {
 
         graph.addSeries(series)
 
-        series2.color = Color.rgb(25, 50, 60)
-        series2.title = "Влажность"
-        series2.isDrawDataPoints = true
-        series2.dataPointsRadius = 15f
-        series2.thickness = 2
-
-        graph.getSecondScale().addSeries(series2)
-
-        graph.title = "Температура и Влажность"
+        graph.title = "Температура"
         graph.titleTextSize = 50F
         graph.titleColor = Color.RED
 
@@ -142,7 +125,6 @@ class Sensor3 : Fragment() {
         graph.viewport.setScrollableY(true);
 
         /////////////////////////////////////////////////////
-
 
     }
 
