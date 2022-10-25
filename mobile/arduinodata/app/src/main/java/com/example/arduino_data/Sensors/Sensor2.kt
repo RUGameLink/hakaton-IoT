@@ -64,7 +64,7 @@ class Sensor2 : Fragment() {
 
                     getResultFeed("field2")
                     if (field2 != "null"){
-                        graph2LastXValue += 1.0;
+                        graph2LastXValue += 0.1;
                         series.appendData(DataPoint(graph2LastXValue, field2.toDouble()), true, 60)
                     }
 
@@ -72,7 +72,7 @@ class Sensor2 : Fragment() {
                 catch (ex: Exception){
                     println(ex)
                 }
-                mainHandler.postDelayed(this, 20000)
+                mainHandler.postDelayed(this, 1000)
             }
         })
         return view
@@ -96,14 +96,14 @@ class Sensor2 : Fragment() {
         graph = view.findViewById(R.id.graph2)
 
         series.color = Color.rgb(0, 80, 100)
-        series.title = "CH4"
+        series.title = "CO"
         series.isDrawDataPoints = true
         series.dataPointsRadius = 15f
         series.thickness = 2
 
         graph.addSeries(series)
 
-        graph.title = "CH4"
+        graph.title = "CO"
         graph.titleTextSize = 50F
         graph.titleColor = Color.RED
 

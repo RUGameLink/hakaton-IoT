@@ -55,7 +55,7 @@ class Sensor3 : Fragment() {
         series.setOnDataPointTapListener { series, dataPoint ->
             Toast.makeText(
                 activity,
-                "Информация с датчика CO2: \n Показатель ${dataPoint.y} \nВремя ${field3Date}",
+                "Информация с датчика Температуры: \n Показатель ${dataPoint.y} \nВремя ${field3Date}",
                 Toast.LENGTH_SHORT
             ).show()
         }
@@ -63,7 +63,7 @@ class Sensor3 : Fragment() {
         series2.setOnDataPointTapListener { series2, dataPoint ->
             Toast.makeText(
                 activity,
-                "Информация с датчика CO2: \n Показатель ${dataPoint.y} \nВремя ${field4Date}",
+                "Информация с датчика Влажности: \n Показатель ${dataPoint.y} \nВремя ${field4Date}",
                 Toast.LENGTH_SHORT
             ).show()
         }
@@ -79,7 +79,7 @@ class Sensor3 : Fragment() {
                     getResultFeed("field3")
                     getResultFeed("field4")
                     if (field3 != "null" || field4 != "null"){
-                        graph2LastXValue += 1.0;
+                        graph2LastXValue += 0.1;
                         series.appendData(DataPoint(graph2LastXValue, field3.toDouble()), true, 60)
                         series2.appendData(DataPoint(graph2LastXValue, field4.toDouble()), true, 60)
                     }
@@ -88,7 +88,7 @@ class Sensor3 : Fragment() {
                 catch (ex: Exception){
                     println(ex)
                 }
-                mainHandler.postDelayed(this, 20000)
+                mainHandler.postDelayed(this, 1000)
             }
         })
         return view
@@ -123,7 +123,7 @@ class Sensor3 : Fragment() {
         series2.dataPointsRadius = 15f
         series2.thickness = 2
 
-        graph.addSeries(series2)
+        graph.getSecondScale().addSeries(series2)
 
         graph.title = "Температура и Влажность"
         graph.titleTextSize = 50F

@@ -62,16 +62,16 @@ class Sensor4 : Fragment() {
 
                 try {
 
-                    getResultFeed("field4")
+                    getResultFeed("field5")
                     if (field5 != "null") {
-                        graph2LastXValue += 1.0;
+                        graph2LastXValue += 0.1;
                         series.appendData(DataPoint(graph2LastXValue, field5.toDouble()), true, 60)
                     }
 
                 } catch (ex: Exception) {
                     println(ex)
                 }
-                mainHandler.postDelayed(this, 20000)
+                mainHandler.postDelayed(this, 1000)
             }
         })
         return view
