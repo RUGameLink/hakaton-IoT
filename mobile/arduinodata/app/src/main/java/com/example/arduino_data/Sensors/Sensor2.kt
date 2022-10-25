@@ -96,14 +96,14 @@ class Sensor2 : Fragment() {
         graph = view.findViewById(R.id.graph2)
 
         series.color = Color.rgb(0, 80, 100)
-        series.title = "CO"
+        series.title = "CH4"
         series.isDrawDataPoints = true
         series.dataPointsRadius = 15f
         series.thickness = 2
 
         graph.addSeries(series)
 
-        graph.title = "CO"
+        graph.title = "CH4"
         graph.titleTextSize = 50F
         graph.titleColor = Color.RED
 
